@@ -1,19 +1,22 @@
 <h2>Create a New Book</h2>
 <form action="/books" method="post">
-  <!-- Required for Rails forms to work -->
-  <input name="authenticity_token" value="<%= form_authenticity_token %>"
+  <fieldset>
+    <legend>Create a Book</legend>
+    <!-- Required for Rails forms to work -->
+    <input name="authenticity_token" value="<%= form_authenticity_token %>"
     type="hidden">
 
-  <label for="title">Title:</label>
-  <input name="title" value="" id="title" type="text">
-  <br  />
-  <label for="author">Author:</label>
-  <input name="author" id="author" type="text">
+    <label for="title">Title:</label>
+    <input name="book[title]" value="" id="title" type="text">
+    <br  />
+    <label for="author">Author:</label>
+    <input name="book[author]" id="author" type="text">
 
-  <label for="description">Description:</label>
-  <textarea name="description" id="description" >
-  </textarea>
-  <input name="submit" value="Create Book"
+    <label for="description">Description:</label>
+    <textarea name="book[description]" id="description" >
+    </textarea>
+    <input name="submit" value="Create Book"
     type="submit">
+  </fieldset>
 
 </form>
