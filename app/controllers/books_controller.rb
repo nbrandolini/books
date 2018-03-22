@@ -10,6 +10,7 @@ class BooksController < ApplicationController
   end
 
   def new
+    @book = Book.new
   end
 
   def create
@@ -21,6 +22,7 @@ class BooksController < ApplicationController
   end
 
   def edit
+    @book = Book.find_by(id: params[:id])
   end
 
   def update
