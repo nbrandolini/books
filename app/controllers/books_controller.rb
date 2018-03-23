@@ -20,6 +20,8 @@ class BooksController < ApplicationController
     book.description = params[:book][:description]
     if book.save
       redirect_to root_path
+    else
+      render :new
     end
   end
 
@@ -33,7 +35,7 @@ class BooksController < ApplicationController
       @book.title = params[:book][:title]
       @book.author = params[:book][:author]
       @book.description = params[:book][:description]
-      if book.save
+      if @book.save
       #  if @book.update(title: params[:book][:title],
       #   author: params[:book][:author],
       #   description: params[:book][:description])
