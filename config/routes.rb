@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   # GET  /books/new
 
+  root 'books#index'
+  # root_path exists
+
+  # patch '/books/pinecone/:bannana', to: 'books#read'
   get '/books/new', to: 'books#new', as: 'new_book'
   # get 'books/search/'
   get '/books/:id', to: 'books#show', as: 'book'
