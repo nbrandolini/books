@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :authors
+
   # GET  /books/new
 
   root 'books#index'
