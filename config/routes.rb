@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   # patch '/authors/:id/mark_pulitzer', to: 'authors#mark_p'
 
   resources :authors do
-    resources :books, only: [:index, :new]
+    resources :books, only: [:new, :create]
   end
 
-  resources :books
+  resources :books, except: [:new, :create]
 
 
   # GET  /books/new

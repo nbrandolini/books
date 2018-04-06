@@ -19,10 +19,13 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @book.author = Author.find(params[:author_id])
+    @action = author_books_path(params[:author_id])
   end
 
   def create
     @book = Book.new(book_params)
+    @book.author = Author.find(params[:author_id])
     if @book.save
       redirect_to root_path
     else
