@@ -1,7 +1,15 @@
 class BooksController < ApplicationController
 
   def index
-    @books = Book.all
+    # If we are in a nested route (/authors/7/books), we don't want @books to be Book.all, we want @books to just be the author's books
+    if params[:author_id]
+      author = Author.find_by(id: params[:author_id])
+      @books = author.books
+    else
+      # we don't need to find a specific author's books, we just need to list all books
+      @books = Book.all
+
+    end
   end
 
   def show
