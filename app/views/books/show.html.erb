@@ -3,6 +3,16 @@
 <p>
   <%= @book.description %>
 </p>
+
+<h4>Genres:</h4>
+<ul>
+  <% @book.genres.each do |genre| %>
+    <li>
+      <%= genre.name %>
+    </li>
+  <% end %>
+</ul>
+
 <ul>
   <li>
     <%= link_to "Edit", edit_book_path %>
