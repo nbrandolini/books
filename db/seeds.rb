@@ -31,8 +31,17 @@ book_list = [
   {title: "Wizard of Oz", description: "Allegory", author_id: Author.all.sample.id},
 ]
 
+genres = [{name: "Fantasy"},{name: "Programming"}, {name: "Romance"}, {name: "Teen"}]
+
+genres.each do |genre|
+  genre = Genre.create(genre)
+  puts "#{genre[:name]} has ID: #{genre.id}"
+end 
+
 book_list.each do |book|
   book = Book.create(book)
+  book.genres << Genre.all.sample
+  book.save
   puts "#{book[:title]} has ID: #{book.id}"
 end
 
