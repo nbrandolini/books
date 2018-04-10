@@ -14,7 +14,7 @@ class BooksController < ApplicationController
 
   def show
     id = params[:id]
-    @book = Book.find(id)
+    @book = Book.find_by(id: id)
   end
 
   def new
@@ -27,8 +27,10 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @book.author = Author.find(params[:author_id])
     if @book.save
+      flash[:success] = "#{@book.title} created"
       redirect_to root_path
     else
+      flash.now[:alert] = @book.errors
       render :new
     end
   end
@@ -41,6 +43,7 @@ class BooksController < ApplicationController
     @book = Book.find_by(id: params[:id])
     if !@book.nil?
       if @book.update(book_params)
+        flash[:success] = "#{@book.title} updated"
         redirect_to book_path(@book.id)
       else
         render :edit
@@ -48,15 +51,18 @@ class BooksController < ApplicationController
     else
       redirect_to books_path
     end
-
-
   end
 
   def destroy
     id = params[:id]
-    @book = Book.find(id)
-    if @book
-      @book.destroy
+    begin
+      @book = Book.find(id)
+      if @book
+        @book.destroy
+      end
+      flash[:success] = "#{@book.title} deleted"
+    rescue
+      flash[:alert] = "Book does not exist"
     end
     redirect_to books_path
   end
