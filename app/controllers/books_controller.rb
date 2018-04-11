@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :find_book, only: [:show, :edit, :udpate]
+  before_action :find_book, only: [:show, :edit, :udpate, :destroy]
 
   def index
     @user = User.find_by(id: session[:user_id])
@@ -52,15 +52,11 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    id = params[:id]
-    begin
-      @book = Book.find(id)
-      if @book
-        @book.destroy
-      end
+    if @book
+      @book.destroy
       flash[:success] = "#{@book.title} deleted"
-    rescue
-      flash[:alert] = "Book does not exist"
+    else
+      flash[:alert] = { book: "does not exist" }
     end
     redirect_to books_path
   end
