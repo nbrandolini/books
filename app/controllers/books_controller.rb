@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :find_book, only: [:show, :edit, :udpate]
 
   def index
     @user = User.find_by(id: session[:user_id])
@@ -14,8 +15,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    id = params[:id]
-    @book = Book.find_by(id: id)
   end
 
   def new
@@ -37,11 +36,9 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find_by(id: params[:id])
   end
 
   def update
-    @book = Book.find_by(id: params[:id])
     if !@book.nil?
       if @book.update(book_params)
         flash[:success] = "#{@book.title} updated"
@@ -74,12 +71,7 @@ class BooksController < ApplicationController
     return params.require(:book).permit(:author_id, :description, :title, genre_ids: [])
   end
 
-
-
-
-
-
-
-
-
+  def find_book
+    @book = Book.find_by(id: params[:id])
+  end
 end
