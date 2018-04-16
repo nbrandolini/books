@@ -4,7 +4,6 @@ describe AuthorsController do
   it "should get index" do
     # Arrange
 
-
     # Act
     get authors_path
 
@@ -13,12 +12,16 @@ describe AuthorsController do
     # must_redirect_to root_path
   end
 
-  it "should get show" do
+  it "should show an author" do
+    get author_path(authors(:metz).id)
 
+    must_respond_with :success
   end
 
   it "should edit an author" do
+    get edit_author_path(authors(:metz).id)
 
+    must_respond_with :success
   end
 
   it "should update an author" do
