@@ -12,6 +12,9 @@ class AuthorsController < ApplicationController
 
   def edit
     @author = Author.find_by(id: params[:id])
+    if @author.nil?
+      redirect_to root_path
+    end
   end
 
   def update
