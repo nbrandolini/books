@@ -44,7 +44,18 @@ describe AuthorsController do
     must_respond_with :success
   end
 
-  it "should get create" do
+  describe "create" do
+    it "successfully creates an author with valid data" do
+      proc {
+        post authors_path, params: {
+          author: {
+            name: "New Author" }
+          }
+      }.must_change 'Author.count', 1
+
+      must_respond_with :redirect
+      must_redirect_to authors_path
+    end
 
   end
 
