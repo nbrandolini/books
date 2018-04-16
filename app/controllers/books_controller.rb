@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :find_book, only: [:show, :edit, :udpate, :destroy]
+  before_action :find_user
 
   def index
     @user = User.find_by(id: session[:user_id])

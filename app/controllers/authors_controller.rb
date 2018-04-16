@@ -1,4 +1,6 @@
 class AuthorsController < ApplicationController
+  before_action :find_user
+
   def index
     @authors = Author.all
   end
