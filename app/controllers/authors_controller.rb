@@ -3,6 +3,7 @@ class AuthorsController < ApplicationController
 
   def index
     @authors = Author.all
+    # redirect_to root_path
   end
 
   def show
