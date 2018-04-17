@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  root 'books#index'
+  
+  get '/auth/:provider/callback', to: 'sessions#create'
+
   get '/login', to: 'sessions#new', as: 'login_form'
   post '/login', to: 'sessions#create', as: 'login'
   delete '/login', to: 'sessions#destroy', as: 'logout'
@@ -15,7 +19,6 @@ Rails.application.routes.draw do
 
   # GET  /books/new
 
-  root 'books#index'
   # root_path exists
 
   # # patch '/books/pinecone/:bannana', to: 'books#read'
