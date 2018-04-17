@@ -33,9 +33,21 @@ describe AuthorsController do
     end
   end
 
+  describe "update" do
+    it "updates an Author's name when given a valid name and valid author" do
+      updated_name = "deeface"
 
-  it "should update an author" do
+      put author_path authors(:metz).id, params: {
+        author: {
+          name: updated_name
+        }
+      }
 
+      # Changes won't reflected in the yml file
+      updated_author = Author.find(authors(:metz).id)
+      updated_author.name.must_equal updated_name
+      must_respond_with :redirect
+    end
   end
 
   it "should get new" do
