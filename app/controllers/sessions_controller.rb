@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 
     if auth_hash[:uid]
       @user = User.find_by(uid: auth_hash[:uid], provider: 'github')
+      # @user = User.find_by(uid: auth_hash[:uid], provider: params[:provider])
 
       if @user.nil?
         @user = User.build_from_github(auth_hash)
@@ -25,7 +26,7 @@ class SessionsController < ApplicationController
         session[:user_id] = @user.id
         redirect_to root_path
       end
-          
+
     else
       flash[:error] = "Logging in through GitHub not successful"
       redirect_to root_path

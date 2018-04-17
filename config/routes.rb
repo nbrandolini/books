@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
   root 'books#index'
-  
+
   get '/auth/:provider/callback', to: 'sessions#create'
+  get '/auth/github', as: 'github_login'
 
   get '/login', to: 'sessions#new', as: 'login_form'
   post '/login', to: 'sessions#create', as: 'login'
